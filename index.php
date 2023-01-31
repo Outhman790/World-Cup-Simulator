@@ -28,21 +28,19 @@ if (isset($_COOKIE["games"])) {
 
 <body>
     <header>
-        <h1 class="text-center">WC Simulator</h1>
+        <h1 class="text-center m-5">WC Simulator</h1>
         <?php
         if ($_SERVER["REQUEST_METHOD"] == 'GET' && isset($_GET['gameName']) ){
-            echo "I'm here";
             foreach($games as $game => $gameInfo) {
                 $games[$game][$_GET[$game][0]] = $_GET[$game][1];
                 $games[$game][$_GET[$game][2]] = $_GET[$game][3];
                 $games[$game]['played'] = true;
-                echo "<pre>";
-                print_r($_GET[$game]);
-                echo "</pre>";
+                // echo "<pre>";
+                // print_r($_GET[$game]);
+                // echo "</pre>";
             }
             setcookie('games', json_encode($games));
         } elseif ($_SERVER["REQUEST_METHOD"] == 'GET' && isset($_GET['reset'])){
-            echo "RESET DONE";
             $games = array(
                 "morrocoVSBrasil" => array("MOROCCO" => 0, "BRASIL" => 0, "played" => false),
                 "morrocoVSSpain" => array("MOROCCO" => 0, "SPAIN" => 0, "played" => false),
@@ -57,7 +55,7 @@ if (isset($_COOKIE["games"])) {
     </header>
     <!-- all games section -->
     <main class="d-flex justify-content-center">
-        <section class="col-md-4" id="games">
+        <section class="col-md-4 mx-1" id="games">
             <?php
         foreach ($games as $game => $gameInfo): ?>
             <?php
@@ -67,8 +65,8 @@ if (isset($_COOKIE["games"])) {
                 array_push($nationalTeamsInfo, $value);
                 ?>
             <?php endforeach ?>
-            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="get" class="">
-                <div id="match" class="d-flex bg-secondary m-2 p-2 justify-content-center align-items-center">
+            <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="get" class="navy_blue_bg p-3 mb-3">
+                <div id="match" class="d-flex m-2 p-2 justify-content-center align-items-center baby_blue_bg ">
                     <div class="team1 w-50 text-center">
                         <?php echo $nationalTeams[0] ?>
                     </div>
@@ -93,17 +91,17 @@ if (isset($_COOKIE["games"])) {
                     </div>
                 </div>
                 <?php endforeach ?>
-                <input type="submit" name="" value="Play" class="d-block btn btn-success w-25 mx-auto">
+                <input type="submit" name="" value="Play" class="d-block btn btn-success px-4 py-2 mx-auto">
             </form>
             <div class="text-center">
                 <form method='GET' action="<?php echo $_SERVER['PHP_SELF']; ?>">
                     <input type="hidden" name="reset" value="reset">
-                    <input type="submit" class="btn text-center mx-auto btn-danger" value="Reset all games">
+                    <input type="submit" class="btn text-center mx-auto btn-danger mb-5" value="Reset all games">
                 </form>
             </div>
         </section>
-        <section class="col-md-6 px-3 py-4">
-            <h2 class="py-2 text-center text-danger">Leaderboard table</h2>
+        <section class="col-md-6 px-3 py-4 mx-1">
+            <h2 class="py-2 text-center text-primary">Leaderboard table</h2>
             <div class="table-responsive">
                 <table class="table table-striped text-center">
                     <thead>
@@ -124,7 +122,7 @@ if (isset($_COOKIE["games"])) {
                         <?php
                         if (isset($_REQUEST['simulate']) &&  $_REQUEST['simulate'] == "simulate") 
                         {
-                            foreach(sortByTwoEquals(resultCouter($games)) as  $game => $gameInfo){
+                            foreach(sortTable(createTeams($games)) as  $game => $gameInfo){
                               
                         ?>
                         <tr>
@@ -196,7 +194,7 @@ if (isset($_COOKIE["games"])) {
                 ?>
                         <form method="GET" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                             <input type="hidden" name="simulate" value="simulate" class="m-auto">
-                            <input type="submit" class="btn text-center mx-auto blue_bg text-light" value="simulate">
+                            <input type="submit" class="btn text-center mx-auto blue_bg my-2 simulate" value="simulate">
                         </form>
         </section>
     </main>

@@ -1,0 +1,20 @@
+.team1,
+.team2 {
+  font-weight: 700;
+}
+thead {
+  background-color: #000c66;
+  color: white;
+}
+.dark_blue_bg {
+  background-color: #050a30;
+}
+.navy_blue_bg {
+  background-color: #000c66;
+}
+.blue_bg {
+  background-color: #0000ff;
+}
+.baby_blue_bg {
+  background-color: #7ec8e3;
+}

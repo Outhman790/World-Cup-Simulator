@@ -18,3 +18,10 @@ thead {
 .baby_blue_bg {
   background-color: #7ec8e3;
 }
+.simulate {
+  color: white;
+}
+.simulate:hover {
+  background-color: #7ec8e3;
+  color: blue;
+}

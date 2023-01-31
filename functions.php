@@ -10,7 +10,7 @@ function getTheOposite($array, $firstteam)
     }
 }
 // result array here will be the matches (the array containing all the matches)
-function resultCouter($resultsArray)
+function createTeams($resultsArray)
 {
     $Teams = [];
     // this codes used to get the available teams from the resultsArray ;
@@ -99,7 +99,7 @@ function dataFormChanger($data)
     return $bestArrayForm;
 }
 
-function sortByTwoEquals($data)
+function sortTable($data)
 {
     global $games;
     usort($data, function ($x, $y) {

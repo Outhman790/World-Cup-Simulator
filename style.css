@@ -25,3 +25,67 @@ thead {
   background-color: #7ec8e3;
   color: blue;
 }
+
+/* Score input styling */
+input[type="number"] {
+  border: 3px solid #000c66 !important;
+  border-radius: 8px !important;
+  background-color: white !important;
+  min-width: 120px !important;
+  min-height: 50px !important;
+  font-size: 24px !important;
+  font-weight: bold !important;
+  text-align: center !important;
+  display: block !important;
+  margin: 10px !important;
+}
+
+input[type="number"]:focus {
+  border-color: #7ec8e3 !important;
+  box-shadow: 0 0 0 0.3rem rgba(126, 200, 227, 0.4) !important;
+  outline: none !important;
+}
+
+input[type="number"]:read-only {
+  background-color: #f8f9fa !important;
+  border-color: #6c757d !important;
+}
+
+/* Ensure inputs are visible */
+#teamsScores input[type="number"] {
+  width: 120px !important;
+  height: 50px !important;
+  font-size: 24px !important;
+  font-weight: bold !important;
+  border: 3px solid #000c66 !important;
+  background-color: white !important;
+  color: #000c66 !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2) !important;
+  transition: all 0.3s ease !important;
+}
+
+#teamsScores input[type="number"]:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3) !important;
+}
+
+/* Make the VS text more prominent */
+#teamsScores .fw-bold.fs-4 {
+  font-size: 28px !important;
+  font-weight: 900 !important;
+  color: #000c66 !important;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Match container styling */
+#match {
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Team names styling */
+.team1,
+.team2 {
+  font-weight: 700;
+  color: #000c66;
+}

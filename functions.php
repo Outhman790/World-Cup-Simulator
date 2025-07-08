@@ -104,35 +104,44 @@ function sortTable($data)
     global $games;
     usort($data, function ($x, $y) {
         global $games;
-        if ($x["POINTS"] === $y["POINTS"]) {
-            if ($x["DIFF"] === $y["DIFF"]) {
-                if ($x["GOALS_SCORED"] === $y["GOALS_SCORED"]) {
-                    foreach ($games as $matcheKey => $matcheValue) {
-                        if (isset($matcheValue[$x["Team"]])  && isset($matcheValue[$y["Team"]])) {
-                            if ($matcheValue[$x["Team"]] === $matcheValue[$y["Team"]]) {
-                                return 0;
-                            } else if ($matcheValue[$x["Team"]] < $matcheValue[$y["Team"]]) {
-                                return 1;
-                            } else if ($matcheValue[$x["Team"]] > $matcheValue[$y["Team"]]) {
-                                return -1;
-                            }
-                        }
-                    }
-                } else if ($x["GOALS_SCORED"] < $y["GOALS_SCORED"]) {
-                    return 1;
-                } else if ($x["GOALS_SCORED"] > $y["GOALS_SCORED"]) {
-                    return -1;
-                }
-            } else if ($x["DIFF"] < $y["DIFF"]) {
-                return 1;
-            } else if ($x["DIFF"] > $y["DIFF"]) {
-                return -1;
-            }
-        } else if ($x["POINTS"] < $y["POINTS"]) {
-            return 1;
-        } else if ($x["POINTS"] > $y["POINTS"]) {
-            return -1;
+
+        // Primary criterion: Points
+        if ($x["POINTS"] !== $y["POINTS"]) {
+            return $y["POINTS"] - $x["POINTS"]; // Higher points first
         }
+
+        // Secondary criterion: Goal difference
+        if ($x["DIFF"] !== $y["DIFF"]) {
+            return $y["DIFF"] - $x["DIFF"]; // Higher goal difference first
+        }
+
+        // Tertiary criterion: Goals scored
+        if ($x["GOALS_SCORED"] !== $y["GOALS_SCORED"]) {
+            return $y["GOALS_SCORED"] - $x["GOALS_SCORED"]; // Higher goals scored first
+        }
+
+        // If all three criteria are equal, check head-to-head results
+        $xTeam = $x["Team"];
+        $yTeam = $y["Team"];
+
+        // Find the match between these two teams
+        foreach ($games as $matchKey => $matchValue) {
+            if (isset($matchValue[$xTeam]) && isset($matchValue[$yTeam]) && $matchValue["played"]) {
+                $xScore = $matchValue[$xTeam];
+                $yScore = $matchValue[$yTeam];
+
+                if ($xScore > $yScore) {
+                    return -1; // x wins head-to-head
+                } elseif ($xScore < $yScore) {
+                    return 1;  // y wins head-to-head
+                } else {
+                    return 0;  // head-to-head draw
+                }
+            }
+        }
+
+        // If no head-to-head match found or not played, maintain current order
+        return 0;
     });
     return $data;
 }

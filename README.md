@@ -134,3 +134,4 @@ The simulator includes four teams:
 - Form validation and sanitization
 
 ### Screenshots
+![image](https://github.com/user-attachments/assets/7a0ed78d-fec8-4ced-925c-01c32d382aaf)
